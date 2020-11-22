@@ -1,20 +1,73 @@
 import React from 'react';
+import { toast } from 'react-toastify';
+import { isEmail } from 'validator';
+import { useDispatch, useSelector } from 'react-redux';
+import { get } from 'lodash';
 
 import { Container } from '../../styles/GlobalStyles';
-import { Title, Paragrafo } from './styled';
+import { Form } from './styled';
+import * as actions from '../../store/modules/auth/actions';
 
-export default function Login() {
+import Loading from '../../components/Loading';
+
+export default function Login(props) {
+  const dispatch = useDispatch();
+
+  const prevPath = get(props, 'location.state.prevPath', '/');
+  const history = get(props, 'history');
+
+  const isLoading = useSelector((state) => state.auth.isLoading);
+
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    let formErrors = false;
+
+    if (!isEmail(email)) {
+      formErrors = true;
+      toast.error('E-mail inválido.');
+    }
+
+    if (password.length < 6 || password.length > 50) {
+      formErrors = true;
+      toast.error('Senha inválida');
+    }
+
+    if (formErrors) return;
+
+    dispatch(actions.loginRequest({ email, password, prevPath, history }));
+  };
+
   return (
-    // React fragment ( <> </>), Title é o H1
     <Container>
-      <Title>
-        Login
-        <small />
-      </Title>
-      <Paragrafo>Lembrar de colocar esta página na rota de login</Paragrafo>
-      <Paragrafo>Criar o form</Paragrafo>
-      <Paragrafo>Mudar esse botão feio</Paragrafo>
-      <button type="button">Enviar</button>
+      <Loading isLoading={isLoading} />
+
+      <h1>Login</h1>
+
+      <Form onSubmit={handleSubmit}>
+        <label htmlFor="email">
+          E-mail:
+          <input
+            type="text"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Seu e-mail"
+          />
+        </label>
+
+        <label htmlFor="password">
+          Senha:
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Sua senha"
+          />
+        </label>
+        <button type="submit">Acessar</button>
+      </Form>
     </Container>
   );
 }

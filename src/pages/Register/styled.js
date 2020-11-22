@@ -1,13 +1,12 @@
 // Responsável por manter o estilo do Login
 
 import styled from 'styled-components';
-
 import * as colors from '../../config/colors';
 
 export const Form = styled.form`
-  margin-top: 20px;
   display: flex;
   flex-direction: column;
+  margin-top: 20px;
   label {
     display: flex;
     flex-direction: column;
