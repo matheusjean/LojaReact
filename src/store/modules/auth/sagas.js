@@ -16,6 +16,7 @@ function* loginRequest({ payload }) {
 
     payload.history.push(payload.prevPath);
   } catch (e) {
+    // eslint-disable-next-line no-console
     console.log(payload.location);
     toast.error('Usuário ou senha inválidos.');
 

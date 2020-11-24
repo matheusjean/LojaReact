@@ -6,7 +6,7 @@ export default createGlobalStyle`
     margin: 0;
     padding: 0;
     outline: none;
-    box-sizing: border-box;
+    top:300px;
   }
 
   body {
@@ -14,7 +14,6 @@ export default createGlobalStyle`
     background: ${primaryDarkColor};
     color: ${primaryColor};
   }
-
   html, body, #root {
     height: 100%;
   }
@@ -34,9 +33,6 @@ export default createGlobalStyle`
     color: ${primaryColor};
   }
 
-  ul {
-    list-style: none;
-  }
 `;
 
 export const Container = styled.section`
@@ -45,5 +41,7 @@ export const Container = styled.section`
   margin: 30px auto;
   padding: 15px;
   border-radius: 4px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+  position: relative;
+  top: 300px;
 `;

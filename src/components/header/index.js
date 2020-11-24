@@ -41,13 +41,6 @@ export default function Header() {
           <FaSignInAlt size={24} />
         </Link>
       )}
-      {/* <Link to="/fbpage">
-        <FaFacebookF size={40} />
-      </Link>
-
-      <Link to="/instapage">
-        <FaInstagram size={40} />
-      </Link> */}
     </Nav>
   );
 }
